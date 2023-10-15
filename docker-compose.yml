@@ -1,0 +1,19 @@
+version: "3"
+services:
+  chaos_hm:
+    build: 
+      context: .
+      dockerfile: ./Dockerfile
+      args:
+      - GIT_ACCESS_TOKEN
+    platform: linux/x86_64
+    tty: true
+    volumes:
+      - ../:/chaos_hm:cached
+      - ~/.aws:/root/.aws
+    ports:
+      - 28888:28888
+    environment:
+      - AWS_PROFILE
+      - AWS_SESSION_TOKEN
+      - PYTHONPATH=/chaos_hm 
